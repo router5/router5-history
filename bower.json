@@ -1,0 +1,38 @@
+{
+  "name": "router5-listenres",
+  "version": "1.0.0",
+  "homepage": "http://router5.github.io",
+  "authors": [
+    "Thomas Roch <thomas.c.roch@gmail.com>"
+  ],
+  "description": "Listeners plugin for router5",
+  "main": "dist/browser/router5.min.js",
+  "moduleType": [
+    "amd",
+    "es6",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "router",
+    "router5",
+    "Listeners"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "coverage",
+    "scripts",
+    "npm-debug.log",
+    "tests",
+    "bower.json",
+    "README.md",
+    ".travis.yml",
+    "karma.config.js",
+    "package.json",
+    ".gitignore",
+    "gulpfile.js"
+  ]
+}

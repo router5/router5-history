@@ -1,0 +1,58 @@
+{
+  "name": "router5-history",
+  "version": "1.0.0",
+  "description": "History plugin for router5",
+  "main": "dist/commonjs/index.js",
+  "scripts": {
+    "build": "gulp build",
+    "test": "echo 'no tests yet'",
+    "clog": "node scripts/changelog.js",
+    "lint": "eslint modules",
+    "release": "./scripts/release.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/router5/router5-history.git"
+  },
+  "keywords": [
+    "router5",
+    "plugin",
+    "history",
+    "html5",
+    "router"
+  ],
+  "author": "Thomas Roch",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/router5/router5-history/issues"
+  },
+  "homepage": "http://router5.github.io",
+  "devDependencies": {
+    "babel": "^5.8.23",
+    "babel-eslint": "^4.1.3",
+    "conventional-changelog": "^0.5.0",
+    "coveralls": "^2.11.4",
+    "del": "^2.0.2",
+    "eslint": "^1.7.1",
+    "gulp": "^3.9.0",
+    "gulp-babel": "^5.3.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.4.2",
+    "jasmine-core": "^2.3.4",
+    "karma": "^0.13.11",
+    "karma-chrome-launcher": "^0.2.1",
+    "karma-coverage": "^0.5.2",
+    "karma-coveralls": "^1.1.2",
+    "karma-firefox-launcher": "^0.1.6",
+    "karma-jasmine": "^0.3.6",
+    "karma-mocha-reporter": "^1.1.1",
+    "run-sequence": "^1.1.4",
+    "should": "^7.1.0",
+    "through2": "^2.0.0",
+    "vinyl": "^1.0.0",
+    "vinyl-fs": "^2.2.0",
+    "vinyl-source-stream2": "^0.1.1",
+    "yargs": "^3.27.0"
+  }
+}
