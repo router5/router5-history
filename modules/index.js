@@ -12,7 +12,7 @@ function historyPlugin() {
     function onPopState(evt) {
         // Do nothing if no state or if last know state is poped state (it should never happen)
         const newState = !evt.state || !evt.state.name;
-        const state = evt.state || router.matchPath(browser.getLocation());
+        const state = evt.state || router.matchPath(browser.getLocation(router.options));
         const {defaultRoute, defaultParams} = router.options;
 
         if (!state) {
@@ -27,7 +27,7 @@ function historyPlugin() {
 
         router._transition(state, router.lastKnownState, (err, toState) => {
             if (err) {
-                if (err === constants.CANNOT_DEACTIVATE) {
+                if (err === 'CANNOT_DEACTIVATE') {
                     const url = router.buildUrl(router.lastKnownState.name, router.lastKnownState.params);
                     if (!newState) {
                         // Keep history state unchanged but use current URL
@@ -62,7 +62,7 @@ function historyPlugin() {
     }
 
 
-    return { name: pluginName, init, onStart, onStop, onTransitionSuccess };
+    return { name: pluginName, init, onStart, onStop, onTransitionSuccess, onPopState };
 }
 
 export default historyPlugin;

@@ -18,7 +18,7 @@ function historyPlugin() {
     function onPopState(evt) {
         // Do nothing if no state or if last know state is poped state (it should never happen)
         var newState = !evt.state || !evt.state.name;
-        var state = evt.state || router.matchPath(browser.getLocation());
+        var state = evt.state || router.matchPath(browser.getLocation(router.options));
         var _router$options = router.options;
         var defaultRoute = _router$options.defaultRoute;
         var defaultParams = _router$options.defaultParams;
@@ -35,7 +35,7 @@ function historyPlugin() {
 
         router._transition(state, router.lastKnownState, function (err, toState) {
             if (err) {
-                if (err === constants.CANNOT_DEACTIVATE) {
+                if (err === 'CANNOT_DEACTIVATE') {
                     var url = router.buildUrl(router.lastKnownState.name, router.lastKnownState.params);
                     if (!newState) {
                         // Keep history state unchanged but use current URL
@@ -69,7 +69,7 @@ function historyPlugin() {
         updateBrowserState(toState, router.buildUrl(toState.name, toState.params), opts.replace || opts.reload);
     }
 
-    return { name: pluginName, init: init, onStart: onStart, onStop: onStop, onTransitionSuccess: onTransitionSuccess };
+    return { name: pluginName, init: init, onStart: onStart, onStop: onStop, onTransitionSuccess: onTransitionSuccess, onPopState: onPopState };
 }
 
 exports['default'] = historyPlugin;
