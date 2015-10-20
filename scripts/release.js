@@ -3,7 +3,7 @@
 var exec = require('child_process').execSync;
 var argv = require('yargs').argv;
 
-var versionType = argv.major ? 'major' : (argv.minor ? 'minor' : 'patch');
+var versionType = argv.major ? 'major' : (argv.minor ? 'minor' : (argv.patch ? 'patch' : '');
 
 function run(cmd, log) {
     log = log === undefined ? true : log;
@@ -14,7 +14,11 @@ function run(cmd, log) {
 
 run('npm prune');
 run('npm install');
-var VERSION = run('npm --no-git-tag-version version ' + versionType, false);
+
+var VERSION;
+if (versionType) {
+    VERSION = run('npm --no-git-tag-version version ' + versionType, false);
+}
 
 run('npm run lint');
 run('npm run build');

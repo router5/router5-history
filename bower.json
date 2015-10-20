@@ -1,12 +1,12 @@
 {
-  "name": "router5-listenres",
-  "version": "1.0.0",
+  "name": "router5-history",
+  "version": "1.0.0-rc1",
   "homepage": "http://router5.github.io",
   "authors": [
     "Thomas Roch <thomas.c.roch@gmail.com>"
   ],
-  "description": "Listeners plugin for router5",
-  "main": "dist/browser/router5.min.js",
+  "description": "History plugin for router5",
+  "main": "dist/browser/router5-history.min.js",
   "moduleType": [
     "amd",
     "es6",
@@ -16,7 +16,9 @@
   "keywords": [
     "router",
     "router5",
-    "Listeners"
+    "history",
+    "history API",
+    "HTML5"
   ],
   "license": "MIT",
   "ignore": [
@@ -29,10 +31,9 @@
     "tests",
     "bower.json",
     "README.md",
-    ".travis.yml",
+    "CHANGELOG.md",
     "karma.config.js",
     "package.json",
-    ".gitignore",
     "gulpfile.js"
   ]
 }
