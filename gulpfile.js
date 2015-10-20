@@ -7,6 +7,7 @@ var uglify       = require('gulp-uglify');
 var del          = require('del');
 
 var files = [
+    'modules/browser.js',
     'modules/index.js'
 ];
 
@@ -45,15 +46,14 @@ function buildBundle(dest, wrapper) {
 }
 
 gulp.task('clean', function() {
-    return del(['dist']);
+    return del(['dist', 'coverage']);
 });
 
 gulp.task('buildCommonJs', build('common', 'dist/commonjs'));
 gulp.task('buildUmd',      build('umd', 'dist/umd'));
-// gulp.task('buildTest',     build('ignore', 'temp/test'));/
 gulp.task('buildGlobal',   buildBundle('browser', globalWrapper));
 gulp.task('buildAmd',      buildBundle('amd', amdWrapper));
 
 gulp.task('build', function() {
-    runSequence('clean', ['buildCommonJs', 'buildUmd', 'buildGlobal', 'buildAmd'/*, 'buildTest'*/]);
+    runSequence('clean', ['buildCommonJs', 'buildUmd', 'buildGlobal', 'buildAmd']);
 });

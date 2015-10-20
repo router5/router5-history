@@ -5,8 +5,8 @@ function historyPlugin() {
     let router;
 
     function updateBrowserState(state, url, replace) {
-        if (replace) replaceState(state, url, '');
-        else pushState(state, url, '');
+        if (replace) replaceState(state, '', url);
+        else pushState(state, '', url);
     }
 
     function onPopState(evt) {
@@ -62,7 +62,7 @@ function historyPlugin() {
     }
 
 
-    return { name: pluginName, init, onTransitionSuccess, flush };
+    return { name: pluginName, init, onStart, onStop, onTransitionSuccess };
 }
 
 export default historyPlugin;

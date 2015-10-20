@@ -19,7 +19,7 @@
         var router = undefined;
 
         function updateBrowserState(state, url, replace) {
-            if (replace) (0, _browser.replaceState)(state, url, '');else (0, _browser.pushState)(state, url, '');
+            if (replace) (0, _browser.replaceState)(state, '', url);else (0, _browser.pushState)(state, '', url);
         }
 
         function onPopState(evt) {
@@ -76,7 +76,7 @@
             updateBrowserState(toState, router.buildUrl(toState.name, toState.params), opts.replace || opts.reload);
         }
 
-        return { name: pluginName, init: init, onTransitionSuccess: onTransitionSuccess, flush: flush };
+        return { name: pluginName, init: init, onStart: onStart, onStop: onStop, onTransitionSuccess: onTransitionSuccess };
     }
 
     module.exports = historyPlugin;

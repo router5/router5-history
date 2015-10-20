@@ -12,14 +12,17 @@ module.exports = function(config) {
         singleRun: true,
 
         // browsers: ['Firefox'],
-        browsers: sauce ? Object.keys(customLaunchers) : ['Firefox'],
+        browsers: ['Firefox'],
 
         files: [
-            'temp/test/index.js'
+            'node_modules/router5/dist/browser/router5.js',
+            'dist/browser/router5-history.js',
+            'test/create-router.js',
+            'test/main.js'
         ],
 
         preprocessors: {
-          'temp/test/*.js': ['coverage']
+          'dist/browser/router5-history.js': ['coverage']
         },
 
         plugins: [
@@ -29,7 +32,7 @@ module.exports = function(config) {
             'karma-mocha-reporter',
             'karma-coverage',
             'karma-coveralls'
-        ].concat(sauce ? 'karma-sauce-launcher' : []),
+        ],
 
         reporters: ['mocha', 'coverage', 'coveralls'],
 
@@ -38,8 +41,6 @@ module.exports = function(config) {
             reporters: [
                 {type: 'lcov'}
             ],
-        },
-
-        customLaunchers: customLaunchers
+        }
     });
 };

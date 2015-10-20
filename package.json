@@ -5,7 +5,7 @@
   "main": "dist/commonjs/index.js",
   "scripts": {
     "build": "gulp build",
-    "test": "echo 'no tests yet'",
+    "test": "karma start karma.config.js",
     "clog": "node scripts/changelog.js",
     "lint": "eslint modules",
     "release": "./scripts/release.js"
@@ -47,6 +47,7 @@
     "karma-firefox-launcher": "^0.1.6",
     "karma-jasmine": "^0.3.6",
     "karma-mocha-reporter": "^1.1.1",
+    "router5": "router5/router5#one-zero-zero",
     "run-sequence": "^1.1.4",
     "should": "^7.1.0",
     "through2": "^2.0.0",
