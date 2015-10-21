@@ -1,8 +1,8 @@
 (function (global, factory) {
     if (typeof define === 'function' && define.amd) {
-        define(['exports', 'module', 'browser'], factory);
+        define(['exports', 'module', './browser'], factory);
     } else if (typeof exports !== 'undefined' && typeof module !== 'undefined') {
-        factory(exports, module, require('browser'));
+        factory(exports, module, require('./browser'));
     } else {
         var mod = {
             exports: {}
