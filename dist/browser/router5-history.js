@@ -3,7 +3,7 @@
  * @version 1.0.0-rc1
  * The MIT License (MIT)
  * 
- * Copyright (c) Thomas Roch 2015
+ * Copyright (c) 2015 Thomas Roch
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -139,9 +139,17 @@
     
         function init(target) {
             router = target;
+            // Monkey patch getLocation
+            router.getLocation = function () {
+                return browser.getLocation(router.options);
+            };
         }
     
         function onStart() {
+            // Guess base
+            if (router.options.useHash && router.options.base) {
+                router.options.base = browser.getBase();
+            }
             addPopstateListener(onPopState);
         }
     

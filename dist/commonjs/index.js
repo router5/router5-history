@@ -55,9 +55,17 @@ function historyPlugin() {
 
     function init(target) {
         router = target;
+        // Monkey patch getLocation
+        router.getLocation = function () {
+            return browser.getLocation(router.options);
+        };
     }
 
     function onStart() {
+        // Guess base
+        if (router.options.useHash && router.options.base) {
+            router.options.base = browser.getBase();
+        }
         (0, _browser.addPopstateListener)(onPopState);
     }
 

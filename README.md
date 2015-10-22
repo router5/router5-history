@@ -32,3 +32,8 @@ const router = new Router5()
 
 - Uses the history API to update history state and URL on router5 state changes
 - Listens to popstate events (back and forward buttons, manual changes of URL)
+
+
+### Contributing
+
+Please read [contributing guidelines](https://github.com/router5/router5/blob/master/CONTRIBUTING.md) on router5 repository.
