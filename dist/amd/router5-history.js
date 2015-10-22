@@ -100,6 +100,7 @@ define('router5HistoryPlugin', [], function () {
         }
     
         function onPopState(evt) {
+            console.log(evt, evt.state, this.lastKnownState);
             // Do nothing if no state or if last know state is poped state (it should never happen)
             var newState = !evt.state || !evt.state.name;
             var state = evt.state || router.matchPath(browser.getLocation(router.options));
@@ -113,7 +114,7 @@ define('router5HistoryPlugin', [], function () {
                 router.navigate(defaultRoute, defaultParams, { reload: true, replace: true });
                 return;
             }
-            if (router.lastKnownState && router.areStatesEqual(state, router.lastKnownState, false)) {
+            if (router.lastKnownState && router.areStatesEqual(state, router.lastKnownState, true)) {
                 return;
             }
     
@@ -132,7 +133,7 @@ define('router5HistoryPlugin', [], function () {
                             router.navigate(defaultRoute, defaultParams, { reload: true, replace: true });
                         }
                 } else {
-                    updateBrowserState(toState, router.buildUrl(toState.name, toState.params), newState);
+                    updateBrowserState(toState, router.buildUrl(toState.name, toState.params), !newState);
                 }
             });
         }

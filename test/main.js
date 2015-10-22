@@ -47,23 +47,19 @@ describe('historyPlugin', function () {
     it('should handle popstate events', function (done) {
         var homeState = {name: 'home', params: {}, path: '/home'};
         var evt = {};
-        plugin.onPopState(evt);
-        setTimeout(function () {
-            expect(router.getState()).not.toEqual(homeState);
+        router.navigate('home', {}, {}, function (err, state) {
+            expect(state).toEqual(homeState);
 
-            evt.state = homeState;
-            plugin.onPopState(evt);
-
-            setTimeout(function () {
-                expect(router.getState()).toEqual(homeState);
-
-                router.navigate('users', {}, {}, function () {
-                    router.registerComponent('users', {canDeactivate: function () { return false; }});
-                    // Nothing will happen
-                    plugin.onPopState(evt);
+            router.navigate('users', {}, {}, function (err, state) {
+                expect(state).toEqual({name: 'users', params: {}, path: '/users'});
+                // router.registerComponent('users', {canDeactivate: function () { return false; }});
+                history.back();
+                setTimeout(function () {
+                    expect(router.getState()).toEqual(homeState);
+                    history.forward();
                     // Push to queue
                     setTimeout(function () {
-                        expect(router.getState()).not.toEqual(homeState);
+                        expect(router.getState()).toEqual({name: 'users', params: {}, path: '/users'});
                         router.deregisterComponent('users');
                         done();
                     });
