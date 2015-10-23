@@ -4,6 +4,8 @@ Object.defineProperty(exports, '__esModule', {
     value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _browser = require('./browser');
 
 var pluginName = 'HISTORY';
@@ -16,10 +18,9 @@ function historyPlugin() {
     }
 
     function onPopState(evt) {
-        console.log(evt, evt.state, this.lastKnownState);
         // Do nothing if no state or if last know state is poped state (it should never happen)
         var newState = !evt.state || !evt.state.name;
-        var state = evt.state || router.matchPath((0, _browser.getLocation)(router.options));
+        var state = newState ? router.matchPath((0, _browser.getLocation)(router.options)) : evt.state;
         var _router$options = router.options;
         var defaultRoute = _router$options.defaultRoute;
         var defaultParams = _router$options.defaultParams;
@@ -34,7 +35,9 @@ function historyPlugin() {
             return;
         }
 
-        router._transition(state, router.lastKnownState, function (err, toState) {
+        var fromState = _extends({}, router.getState());
+
+        router._transition(state, fromState, function (err, toState) {
             if (err) {
                 if (err === 'CANNOT_DEACTIVATE') {
                     var url = router.buildUrl(router.lastKnownState.name, router.lastKnownState.params);
@@ -49,7 +52,7 @@ function historyPlugin() {
                         router.navigate(defaultRoute, defaultParams, { reload: true, replace: true });
                     }
             } else {
-                updateBrowserState(toState, router.buildUrl(toState.name, toState.params), !newState);
+                router._invokeListeners('$$success', toState, fromState, { replace: !newState });
             }
         });
     }
@@ -64,7 +67,7 @@ function historyPlugin() {
 
     function onStart() {
         // Guess base
-        if (router.options.useHash && router.options.base) {
+        if (router.options.useHash && !router.options.base) {
             router.options.base = (0, _browser.getBase)();
         }
         (0, _browser.addPopstateListener)(onPopState);

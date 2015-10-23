@@ -10,10 +10,9 @@ function historyPlugin() {
     }
 
     function onPopState(evt) {
-        console.log(evt, evt.state, this.lastKnownState);
         // Do nothing if no state or if last know state is poped state (it should never happen)
         const newState = !evt.state || !evt.state.name;
-        const state = evt.state || router.matchPath(getLocation(router.options));
+        const state = newState ? router.matchPath(getLocation(router.options)) : evt.state;
         const {defaultRoute, defaultParams} = router.options;
 
         if (!state) {
@@ -26,7 +25,9 @@ function historyPlugin() {
             return;
         }
 
-        router._transition(state, router.lastKnownState, (err, toState) => {
+        const fromState = { ...router.getState() };
+
+        router._transition(state, fromState, (err, toState) => {
             if (err) {
                 if (err === 'CANNOT_DEACTIVATE') {
                     const url = router.buildUrl(router.lastKnownState.name, router.lastKnownState.params);
@@ -41,7 +42,7 @@ function historyPlugin() {
                     router.navigate(defaultRoute, defaultParams, {reload: true, replace: true});
                 }
             } else {
-                updateBrowserState(toState, router.buildUrl(toState.name, toState.params), !newState);
+                router._invokeListeners('$$success', toState, fromState, { replace: !newState });
             }
         });
     }
@@ -56,7 +57,7 @@ function historyPlugin() {
 
     function onStart() {
         // Guess base
-        if (router.options.useHash && router.options.base) {
+        if (router.options.useHash && !router.options.base) {
             router.options.base = getBase();
         }
         addPopstateListener(onPopState);
