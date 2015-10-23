@@ -103,7 +103,7 @@ define('router5HistoryPlugin', [], function () {
             console.log(evt, evt.state, this.lastKnownState);
             // Do nothing if no state or if last know state is poped state (it should never happen)
             var newState = !evt.state || !evt.state.name;
-            var state = evt.state || router.matchPath(browser.getLocation(router.options));
+            var state = evt.state || router.matchPath(getLocation(router.options));
             var _router$options = router.options;
             var defaultRoute = _router$options.defaultRoute;
             var defaultParams = _router$options.defaultParams;
@@ -142,14 +142,14 @@ define('router5HistoryPlugin', [], function () {
             router = target;
             // Monkey patch getLocation
             router.getLocation = function () {
-                return browser.getLocation(router.options);
+                return getLocation(router.options);
             };
         }
     
         function onStart() {
             // Guess base
             if (router.options.useHash && router.options.base) {
-                router.options.base = browser.getBase();
+                router.options.base = getBase();
             }
             addPopstateListener(onPopState);
         }

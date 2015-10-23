@@ -1,5 +1,5 @@
 const pluginName = 'HISTORY';
-import { pushState, replaceState, addPopstateListener, removePopstateListener, getLocation } from './browser';
+import { pushState, replaceState, addPopstateListener, removePopstateListener, getLocation, getBase } from './browser';
 
 function historyPlugin() {
     let router;
@@ -13,7 +13,7 @@ function historyPlugin() {
         console.log(evt, evt.state, this.lastKnownState);
         // Do nothing if no state or if last know state is poped state (it should never happen)
         const newState = !evt.state || !evt.state.name;
-        const state = evt.state || router.matchPath(browser.getLocation(router.options));
+        const state = evt.state || router.matchPath(getLocation(router.options));
         const {defaultRoute, defaultParams} = router.options;
 
         if (!state) {
@@ -50,14 +50,14 @@ function historyPlugin() {
         router = target;
         // Monkey patch getLocation
         router.getLocation = function () {
-            return browser.getLocation(router.options);
+            return getLocation(router.options);
         };
     }
 
     function onStart() {
         // Guess base
         if (router.options.useHash && router.options.base) {
-            router.options.base = browser.getBase();
+            router.options.base = getBase();
         }
         addPopstateListener(onPopState);
     }

@@ -19,7 +19,7 @@ function historyPlugin() {
         console.log(evt, evt.state, this.lastKnownState);
         // Do nothing if no state or if last know state is poped state (it should never happen)
         var newState = !evt.state || !evt.state.name;
-        var state = evt.state || router.matchPath(browser.getLocation(router.options));
+        var state = evt.state || router.matchPath((0, _browser.getLocation)(router.options));
         var _router$options = router.options;
         var defaultRoute = _router$options.defaultRoute;
         var defaultParams = _router$options.defaultParams;
@@ -58,14 +58,14 @@ function historyPlugin() {
         router = target;
         // Monkey patch getLocation
         router.getLocation = function () {
-            return browser.getLocation(router.options);
+            return (0, _browser.getLocation)(router.options);
         };
     }
 
     function onStart() {
         // Guess base
         if (router.options.useHash && router.options.base) {
-            router.options.base = browser.getBase();
+            router.options.base = (0, _browser.getBase)();
         }
         (0, _browser.addPopstateListener)(onPopState);
     }
