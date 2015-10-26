@@ -1,6 +1,7 @@
 /**
  * Dumb functions
  */
+// istanbul ignore next
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -11,6 +12,7 @@ var identity = function identity(arg) {
         return arg;
     };
 };
+// istanbul ignore next
 var noop = function noop() {};
 
 /**
@@ -46,25 +48,21 @@ var getLocation = function getLocation(opts) {
     return path + window.location.search;
 };
 
-var getState = function getState() {
-    return window.history.state;
-};
-
 /**
  * Export browser object
  */
 var browser = {};
 if (isBrowser) {
-    browser = { getBase: getBase, pushState: pushState, replaceState: replaceState, addPopstateListener: addPopstateListener, removePopstateListener: removePopstateListener, getLocation: getLocation, getState: getState };
+    browser = { getBase: getBase, pushState: pushState, replaceState: replaceState, addPopstateListener: addPopstateListener, removePopstateListener: removePopstateListener, getLocation: getLocation };
 } else {
+    // istanbul ignore next
     browser = {
         getBase: identity(''),
         pushState: noop,
         replaceState: noop,
         addPopstateListener: noop,
         removePopstateListener: noop,
-        getLocation: identity(''),
-        getState: identity(null)
+        getLocation: identity('')
     };
 }
 

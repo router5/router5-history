@@ -29,11 +29,13 @@
     /**
      * Dumb functions
      */
+    // istanbul ignore next
     var identity = function identity(arg) {
         return function () {
             return arg;
         };
     };
+    // istanbul ignore next
     var noop = function noop() {};
     
     /**
@@ -69,27 +71,25 @@
         return path + window.location.search;
     };
     
-    var getState = function getState() {
-        return window.history.state;
-    };
-    
     /**
      * Export browser object
      */
     var browser = {};
     if (isBrowser) {
-        browser = { getBase: getBase, pushState: pushState, replaceState: replaceState, addPopstateListener: addPopstateListener, removePopstateListener: removePopstateListener, getLocation: getLocation, getState: getState };
+        browser = { getBase: getBase, pushState: pushState, replaceState: replaceState, addPopstateListener: addPopstateListener, removePopstateListener: removePopstateListener, getLocation: getLocation };
     } else {
+        // istanbul ignore next
         browser = {
             getBase: identity(''),
             pushState: noop,
             replaceState: noop,
             addPopstateListener: noop,
             removePopstateListener: noop,
-            getLocation: identity(''),
-            getState: identity(null)
+            getLocation: identity('')
         };
     }
+    // istanbul ignore next
+    
     var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
     
     var pluginName = 'HISTORY';

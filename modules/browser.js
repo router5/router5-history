@@ -1,7 +1,9 @@
 /**
  * Dumb functions
  */
+// istanbul ignore next
 let identity = arg => () => arg;
+// istanbul ignore next
 let noop = () => {};
 
 /**
@@ -29,23 +31,21 @@ let getLocation = (opts) => {
     return path + window.location.search;
 };
 
-let getState = () => window.history.state;
-
 /**
  * Export browser object
  */
 let browser = {};
 if (isBrowser) {
-    browser = {getBase, pushState, replaceState, addPopstateListener, removePopstateListener, getLocation, getState};
+    browser = {getBase, pushState, replaceState, addPopstateListener, removePopstateListener, getLocation};
 } else {
+    // istanbul ignore next
     browser = {
         getBase:                identity(''),
         pushState:              noop,
         replaceState:           noop,
         addPopstateListener:    noop,
         removePopstateListener: noop,
-        getLocation:            identity(''),
-        getState:               identity(null)
+        getLocation:            identity('')
     };
 }
 

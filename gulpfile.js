@@ -36,7 +36,7 @@ function buildBundle(dest, wrapper) {
     return function() {
         return gulp
             .src(files)
-            .pipe(babel({modules: 'ignore', blacklist: ['strict']}))
+            .pipe(babel({modules: 'ignore', blacklist: ['strict'], auxiliaryCommentBefore: 'istanbul ignore next'}))
             .pipe(bundle(dest, wrapper))
             .pipe(gulp.dest('dist'))
             .pipe(uglify())

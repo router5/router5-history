@@ -23,7 +23,7 @@ function createRouter(base, useHash, hashPrefix) {
         })
         .setOption('useHash', useHash)
         .setOption('hashPrefix', hashPrefix)
-        .setOption('base', base)
+        // .setOption('base', base)
         .add(ordersRoute)
         .addNode('index', '/')
         .addNode('home', '/home')
