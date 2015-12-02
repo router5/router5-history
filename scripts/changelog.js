@@ -7,7 +7,7 @@ var through = require('through2');
 
 function conventionalChangelog(done) {
     clog({
-            preset: 'angular',
+            preset: 'angular'
             // repository: 'https://github.com/router5/router5',
             // append: false
         })

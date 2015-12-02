@@ -1,6 +1,6 @@
 /**
  * @license
- * @version 1.0.0-rc1
+ * @version 1.0.1
  * The MIT License (MIT)
  * 
  * Copyright (c) 2015 Thomas Roch
@@ -136,7 +136,7 @@
                             router.navigate(defaultRoute, defaultParams, { reload: true, replace: true });
                         }
                 } else {
-                    router._invokeListeners('$$success', toState, fromState, { replace: !newState });
+                    router._invokeListeners('$$success', toState, fromState, { replace: true });
                 }
             });
         }

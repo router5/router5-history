@@ -59,7 +59,7 @@
                             router.navigate(defaultRoute, defaultParams, { reload: true, replace: true });
                         }
                 } else {
-                    router._invokeListeners('$$success', toState, fromState, { replace: !newState });
+                    router._invokeListeners('$$success', toState, fromState, { replace: true });
                 }
             });
         }
