@@ -3,8 +3,10 @@ import browser from './browser';
 const { pushState, replaceState, addPopstateListener, removePopstateListener, getLocation, getBase } = browser;
 const pluginName = 'HISTORY';
 
-function historyPlugin() {
-    let router;
+function historyPlugin(router) {
+    router.getLocation = function () {
+        return getLocation(router.options);
+    };
 
     function updateBrowserState(state, url, replace) {
         if (replace) replaceState(state, '', url);
@@ -49,14 +51,6 @@ function historyPlugin() {
         });
     }
 
-    function init(target) {
-        router = target;
-        // Monkey patch getLocation
-        router.getLocation = function () {
-            return getLocation(router.options);
-        };
-    }
-
     function onStart() {
         // Guess base
         if (router.options.useHash && !router.options.base) {
@@ -74,7 +68,7 @@ function historyPlugin() {
     }
 
 
-    return { name: pluginName, init, onStart, onStop, onTransitionSuccess, onPopState };
+    return { name: pluginName, onStart, onStop, onTransitionSuccess, onPopState };
 }
 
 export default historyPlugin;
