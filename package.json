@@ -55,6 +55,7 @@
     "rollup-plugin-babel": "^2.3.6",
     "rollup-plugin-npm": "^1.2.0",
     "rollup-plugin-uglify": "^0.1.0",
+    "router5": "router5/router5#v2",
     "should": "^7.1.0",
     "yargs": "^3.27.0"
   }

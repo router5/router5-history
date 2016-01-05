@@ -1,7 +1,7 @@
 var base = window.location.pathname;
 var router;
 var hashPrefix = '!';
-var plugin = router5HistoryPlugin();
+var plugin = router5HistoryPlugin;
 
 function getPath(useHash) {
     if (useHash) return window.location.hash.replace(new RegExp('#' + hashPrefix), '') + window.location.search;

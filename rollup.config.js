@@ -25,7 +25,7 @@ export default {
     entry: 'modules/index.js',
     format,
     plugins: [ babel(babelOptions), npm({ jsnext: true }) ].concat(compress ? uglify() : []),
-    moduleName: 'historyPlugin',
-    moduleId: 'historyPlugin',
+    moduleName: 'router5HistoryPlugin',
+    moduleId: 'router5HistoryPlugin',
     dest
 };

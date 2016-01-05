@@ -1,3 +1,6 @@
+var Router5 = router5.Router5;
+var RouteNode = router5.RouteNode;
+
 var usersRoute = new RouteNode('users', '/users', [
     new RouteNode('view', '/view/:id'),
     new RouteNode('list', '/list')
