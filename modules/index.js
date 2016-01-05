@@ -1,5 +1,7 @@
+import browser from './browser';
+
+const { pushState, replaceState, addPopstateListener, removePopstateListener, getLocation, getBase } = browser;
 const pluginName = 'HISTORY';
-import { pushState, replaceState, addPopstateListener, removePopstateListener, getLocation, getBase } from './browser';
 
 function historyPlugin() {
     let router;
