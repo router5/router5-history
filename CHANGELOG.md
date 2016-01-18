@@ -1,3 +1,13 @@
+<a name="2.0.0-rc.1"></a>
+# [2.0.0-rc.1](https://github.com/router5/router5-history/compare/v1.0.1...v2.0.0-rc.1) (2016-01-18)
+
+
+### Features
+
+* update to router5 2.0.0 plugin syntax ([362665a](https://github.com/router5/router5-history/commit/362665a))
+
+
+
 <a name="1.0.1"></a>
 ## [1.0.1](https://github.com/router5/router5-history/compare/v1.0.0...v1.0.1) (2015-12-02)
 

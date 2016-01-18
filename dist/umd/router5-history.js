@@ -1,4 +1,8 @@
-var router5HistoryPlugin = (function () { 'use strict';
+(function (global, factory) {
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+    typeof define === 'function' && define.amd ? define('router5HistoryPlugin', factory) :
+    (global.router5HistoryPlugin = factory());
+}(this, function () { 'use strict';
 
     var babelHelpers_extends = Object.assign || function (target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -160,4 +164,4 @@ var router5HistoryPlugin = (function () { 'use strict';
 
     return historyPlugin;
 
-})();
+}));

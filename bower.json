@@ -24,16 +24,11 @@
   "ignore": [
     "**/.*",
     "node_modules",
-    "bower_components",
     "coverage",
-    "scripts",
-    "npm-debug.log",
-    "tests",
+    "test",
     "bower.json",
-    "README.md",
-    "CHANGELOG.md",
-    "karma.config.js",
-    "package.json",
-    "gulpfile.js"
+    "*.md",
+    "*.config.js",
+    "*.json"
   ]
 }

@@ -3,17 +3,17 @@ import browser from './browser';
 const { pushState, replaceState, addPopstateListener, removePopstateListener, getLocation, getBase } = browser;
 const pluginName = 'HISTORY';
 
-function historyPlugin(router) {
+const historyPlugin = () => (router) => {
     router.getLocation = function () {
         return getLocation(router.options);
     };
 
-    function updateBrowserState(state, url, replace) {
+    const updateBrowserState = (state, url, replace) => {
         if (replace) replaceState(state, '', url);
         else pushState(state, '', url);
-    }
+    };
 
-    function onPopState(evt) {
+    const onPopState = (evt) => {
         // Do nothing if no state or if last know state is poped state (it should never happen)
         const newState = !evt.state || !evt.state.name;
         const state = newState ? router.matchPath(getLocation(router.options)) : evt.state;
@@ -49,26 +49,25 @@ function historyPlugin(router) {
                 router._invokeListeners('$$success', toState, fromState, { replace: true });
             }
         });
-    }
+    };
 
-    function onStart() {
+    const onStart = () => {
         // Guess base
         if (router.options.useHash && !router.options.base) {
             router.options.base = getBase();
         }
         addPopstateListener(onPopState);
-    }
+    };
 
-    function onStop() {
+    const onStop = () => {
         removePopstateListener(onPopState);
-    }
+    };
 
-    function onTransitionSuccess(toState, fromState, opts) {
+    const onTransitionSuccess = (toState, fromState, opts) => {
         updateBrowserState(toState, router.buildUrl(toState.name, toState.params), opts.replace || opts.reload);
-    }
-
+    };
 
     return { name: pluginName, onStart, onStop, onTransitionSuccess, onPopState };
-}
+};
 
 export default historyPlugin;

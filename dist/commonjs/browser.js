@@ -1,12 +1,12 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 /**
  * Dumb functions
  */
 // istanbul ignore next
-'use strict';
-
-Object.defineProperty(exports, '__esModule', {
-    value: true
-});
 var identity = function identity(arg) {
     return function () {
         return arg;
@@ -66,5 +66,5 @@ if (isBrowser) {
     };
 }
 
-exports['default'] = browser;
+exports.default = browser;
 module.exports = exports['default'];

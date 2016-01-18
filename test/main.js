@@ -8,18 +8,26 @@ function getPath(useHash) {
     return window.location.pathname.replace(new RegExp('^' + base), '') + window.location.search;
 }
 
+function withoutMeta(state) {
+    return {
+        name: state.name,
+        params: state.params,
+        path: state.path
+    };
+}
+
 describe('historyPlugin', function () {
-    describe('with hash', test(true));
-    describe('without hash', test(false));
+    test(true);
+    test(false);
 });
 
 function test(useHash) {
-    return function () {
+    describe(useHash ? 'With hash' : 'Without hash', function () {
         beforeAll(function () {
             window.history.replaceState({}, '', base);
             if (router) router.stop();
             router = createRouter(base, useHash, hashPrefix);
-            router.usePlugin(plugin);
+            router.usePlugin(plugin());
         });
 
         afterAll(function () {
@@ -31,9 +39,7 @@ function test(useHash) {
         });
 
         it('should update history on start', function (done) {
-            console.log(router.options.base);
             router.start(function (err, state) {
-                console.log(router.options.base);
                 expect(window.history.state).toEqual(state);
                 expect(getPath(useHash)).toBe('/home');
                 done();
@@ -52,24 +58,24 @@ function test(useHash) {
             var homeState = {name: 'home', params: {}, path: '/home'};
             var evt = {};
             router.navigate('home', {}, {}, function (err, state) {
-                expect(state).toEqual(homeState);
+                expect(withoutMeta(state)).toEqual(homeState);
 
                 router.navigate('users', {}, {}, function (err, state) {
-                    expect(state).toEqual({name: 'users', params: {}, path: '/users'});
+                    expect(withoutMeta(state)).toEqual({name: 'users', params: {}, path: '/users'});
                     // router.registerComponent('users', {canDeactivate: function () { return false; }});
                     history.back();
                     setTimeout(function () {
-                        expect(router.getState()).toEqual(homeState);
+                        expect(withoutMeta(router.getState())).toEqual(homeState);
                         history.forward();
                         // Push to queue
                         setTimeout(function () {
-                            expect(router.getState()).toEqual({name: 'users', params: {}, path: '/users'});
-                            router.deregisterComponent('users');
+                            expect(withoutMeta(router.getState())).toEqual({name: 'users', params: {}, path: '/users'});
+                            // router.canDeactivate('users');
                             done();
                         });
                     });
                 });
             });
         });
-    };
+    });
 }
