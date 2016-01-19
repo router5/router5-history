@@ -1,4 +1,5 @@
 **/.*
+coverage
 scripts
 test
 node_modules
