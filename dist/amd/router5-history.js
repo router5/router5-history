@@ -112,7 +112,7 @@ define('router5HistoryPlugin', function () { 'use strict';
                     router.navigate(defaultRoute, defaultParams, { reload: true, replace: true });
                     return;
                 }
-                if (router.lastKnownState && router.areStatesEqual(state, router.lastKnownState, true)) {
+                if (router.lastKnownState && router.areStatesEqual(state, router.lastKnownState, false)) {
                     return;
                 }
 

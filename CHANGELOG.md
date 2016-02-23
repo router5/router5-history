@@ -1,3 +1,13 @@
+<a name="2.0.1"></a>
+## [2.0.1](https://github.com/router5/router5-history/compare/v2.0.0...v2.0.1) (2016-02-23)
+
+
+### Bug Fixes
+
+* don't ignore query parameters on popstate events ([7324719](https://github.com/router5/router5-history/commit/7324719))
+
+
+
 <a name="2.0.0"></a>
 # [2.0.0](https://github.com/router5/router5-history/compare/v2.0.0-rc.1...v2.0.0) (2016-01-19)
 
