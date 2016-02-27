@@ -33,7 +33,9 @@ const historyPlugin = () => (router) => {
 
         router._transition(state, fromState, (err, toState) => {
             if (err) {
-                if (err === 'CANNOT_DEACTIVATE') {
+                if (err.redirect) {
+                    router.navigate(err.redirect.name, err.redirect.params, { replace: true });
+                } else if (err === 'CANNOT_DEACTIVATE') {
                     const url = router.buildUrl(router.lastKnownState.name, router.lastKnownState.params);
                     if (!newState) {
                         // Keep history state unchanged but use current URL
