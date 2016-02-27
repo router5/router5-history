@@ -3,7 +3,7 @@ import browser from './browser';
 const { pushState, replaceState, addPopstateListener, removePopstateListener, getLocation, getBase } = browser;
 const pluginName = 'HISTORY';
 
-const historyPlugin = () => (router) => {
+const historyPlugin = ({ forceDeactivate }) => (router) => {
     router.getLocation = function () {
         return getLocation(router.options);
     };
@@ -22,7 +22,7 @@ const historyPlugin = () => (router) => {
         if (!state) {
             // If current state is already the default route, we will have a double entry
             // Navigating back and forth will emit SAME_STATES error
-            router.navigate(defaultRoute, defaultParams, {reload: true, replace: true});
+            router.navigate(defaultRoute, defaultParams, {forceDeactivate, reload: true, replace: true});
             return;
         }
         if (router.lastKnownState && router.areStatesEqual(state, router.lastKnownState, false)) {
@@ -31,10 +31,10 @@ const historyPlugin = () => (router) => {
 
         const fromState = { ...router.getState() };
 
-        router._transition(state, fromState, (err, toState) => {
+        router._transition(state, fromState, {forceDeactivate}, (err, toState) => {
             if (err) {
                 if (err.redirect) {
-                    router.navigate(err.redirect.name, err.redirect.params, { replace: true });
+                    router.navigate(err.redirect.name, err.redirect.params, {forceDeactivate, replace: true});
                 } else if (err === 'CANNOT_DEACTIVATE') {
                     const url = router.buildUrl(router.lastKnownState.name, router.lastKnownState.params);
                     if (!newState) {
@@ -45,10 +45,10 @@ const historyPlugin = () => (router) => {
                     // TODO: history.back()?
                 } else {
                     // Force navigation to default state
-                    router.navigate(defaultRoute, defaultParams, {reload: true, replace: true});
+                    router.navigate(defaultRoute, defaultParams, {forceDeactivate, reload: true, replace: true});
                 }
             } else {
-                router._invokeListeners('$$success', toState, fromState, { replace: true });
+                router._invokeListeners('$$success', toState, fromState, {replace: true});
             }
         });
     };
