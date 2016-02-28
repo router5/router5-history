@@ -1,8 +1,3 @@
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
 /**
  * Dumb functions
  */
@@ -66,4 +61,4 @@ if (isBrowser) {
     };
 }
 
-exports.default = browser;
+export default browser;

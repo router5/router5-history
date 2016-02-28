@@ -3,7 +3,7 @@ import browser from './browser';
 const { pushState, replaceState, addPopstateListener, removePopstateListener, getLocation, getBase } = browser;
 const pluginName = 'HISTORY';
 
-const historyPlugin = ({ forceDeactivate }) => (router) => {
+const historyPlugin = ({ forceDeactivate } = {}) => (router) => {
     router.getLocation = function () {
         return getLocation(router.options);
     };

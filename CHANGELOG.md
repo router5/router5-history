@@ -1,3 +1,14 @@
+<a name="3.0.0"></a>
+# [3.0.0](https://github.com/router5/router5-history/compare/v2.0.1...v3.0.0) (2016-02-28)
+
+
+### Features
+
+* support option for forcing deactivation on popstate events ([9c4e7d4](https://github.com/router5/router5-history/commit/9c4e7d4))
+* support redirection on transitions failures ([a8116fc](https://github.com/router5/router5-history/commit/a8116fc))
+
+
+
 <a name="2.0.1"></a>
 ## [2.0.1](https://github.com/router5/router5-history/compare/v2.0.0...v2.0.1) (2016-02-23)
 

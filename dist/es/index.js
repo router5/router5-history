@@ -1,23 +1,11 @@
-'use strict';
+import browser from './browser';
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _browser = require('./browser');
-
-var _browser2 = _interopRequireDefault(_browser);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var pushState = _browser2.default.pushState;
-var replaceState = _browser2.default.replaceState;
-var addPopstateListener = _browser2.default.addPopstateListener;
-var removePopstateListener = _browser2.default.removePopstateListener;
-var getLocation = _browser2.default.getLocation;
-var getBase = _browser2.default.getBase;
+var pushState = browser.pushState;
+var replaceState = browser.replaceState;
+var addPopstateListener = browser.addPopstateListener;
+var removePopstateListener = browser.removePopstateListener;
+var getLocation = browser.getLocation;
+var getBase = browser.getBase;
 
 var pluginName = 'HISTORY';
 
@@ -52,7 +40,7 @@ var historyPlugin = function historyPlugin() {
                 return;
             }
 
-            var fromState = _extends({}, router.getState());
+            var fromState = babelHelpers.extends({}, router.getState());
 
             router._transition(state, fromState, { forceDeactivate: forceDeactivate }, function (err, toState) {
                 if (err) {
@@ -96,4 +84,4 @@ var historyPlugin = function historyPlugin() {
     };
 };
 
-exports.default = historyPlugin;
+export default historyPlugin;

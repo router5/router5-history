@@ -93,6 +93,9 @@
     var pluginName = 'HISTORY';
 
     var historyPlugin = function historyPlugin() {
+        var _ref = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+
+        var forceDeactivate = _ref.forceDeactivate;
         return function (router) {
             router.getLocation = function () {
                 return getLocation(router.options);
@@ -113,7 +116,7 @@
                 if (!state) {
                     // If current state is already the default route, we will have a double entry
                     // Navigating back and forth will emit SAME_STATES error
-                    router.navigate(defaultRoute, defaultParams, { reload: true, replace: true });
+                    router.navigate(defaultRoute, defaultParams, { forceDeactivate: forceDeactivate, reload: true, replace: true });
                     return;
                 }
                 if (router.lastKnownState && router.areStatesEqual(state, router.lastKnownState, false)) {
@@ -122,9 +125,11 @@
 
                 var fromState = babelHelpers_extends({}, router.getState());
 
-                router._transition(state, fromState, function (err, toState) {
+                router._transition(state, fromState, { forceDeactivate: forceDeactivate }, function (err, toState) {
                     if (err) {
-                        if (err === 'CANNOT_DEACTIVATE') {
+                        if (err.redirect) {
+                            router.navigate(err.redirect.name, err.redirect.params, { forceDeactivate: forceDeactivate, replace: true });
+                        } else if (err === 'CANNOT_DEACTIVATE') {
                             var url = router.buildUrl(router.lastKnownState.name, router.lastKnownState.params);
                             if (!newState) {
                                 // Keep history state unchanged but use current URL
@@ -134,7 +139,7 @@
                             // TODO: history.back()?
                         } else {
                                 // Force navigation to default state
-                                router.navigate(defaultRoute, defaultParams, { reload: true, replace: true });
+                                router.navigate(defaultRoute, defaultParams, { forceDeactivate: forceDeactivate, reload: true, replace: true });
                             }
                     } else {
                         router._invokeListeners('$$success', toState, fromState, { replace: true });
