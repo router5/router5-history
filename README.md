@@ -28,6 +28,14 @@ const router = new Router5()
     .usePlugin(historyPlugin());
 ```
 
+### Options
+
+You can specify whether or not current active segments deactivation should be forced on popstate events. By default this is `false` but I recommend setting it to `true` to keep a clean history.
+
+```js
+router.usePlugin(historyPlugin({ forceDeactivate: true }));
+```
+
 ### What does it do?
 
 - Uses the history API to update history state and URL on router5 state changes
