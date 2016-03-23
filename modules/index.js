@@ -1,6 +1,6 @@
 import browser from './browser';
 
-const { pushState, replaceState, addPopstateListener, removePopstateListener, getLocation, getBase } = browser;
+const { pushState, replaceState, addPopstateListener, removePopstateListener, getLocation, getBase, getState } = browser;
 const pluginName = 'HISTORY';
 
 const historyPlugin = ({ forceDeactivate } = {}) => (router) => {
@@ -66,7 +66,10 @@ const historyPlugin = ({ forceDeactivate } = {}) => (router) => {
     };
 
     const onTransitionSuccess = (toState, fromState, opts) => {
-        updateBrowserState(toState, router.buildUrl(toState.name, toState.params), opts.replace || opts.reload);
+        const historyState = getState();
+        const replace = opts.replace || fromState && router.areStatesEqual(toState, fromState) ||
+            opts.reload && historyState && router.areStatesEqual(toState, historyState);
+        updateBrowserState(toState, router.buildUrl(toState.name, toState.params), replace);
     };
 
     return { name: pluginName, onStart, onStop, onTransitionSuccess, onPopState };

@@ -2,41 +2,43 @@
  * Dumb functions
  */
 // istanbul ignore next
-let identity = arg => () => arg;
+const identity = arg => () => arg;
 // istanbul ignore next
-let noop = () => {};
+const noop = () => {};
 
 /**
  * Browser detection
  */
-let isBrowser = typeof window !== 'undefined';
+const isBrowser = typeof window !== 'undefined';
 
 /**
  * Browser functions needed by router5
  */
-let getBase = () => window.location.pathname.replace(/\/$/, '');
+const getBase = () => window.location.pathname.replace(/\/$/, '');
 
-let pushState = (state, title, path) => window.history.pushState(state, title, path);
+const pushState = (state, title, path) => window.history.pushState(state, title, path);
 
-let replaceState = (state, title, path) => window.history.replaceState(state, title, path);
+const replaceState = (state, title, path) => window.history.replaceState(state, title, path);
 
-let addPopstateListener = (fn) => window.addEventListener('popstate', fn);
+const addPopstateListener = (fn) => window.addEventListener('popstate', fn);
 
-let removePopstateListener = (fn) => window.removeEventListener('popstate', fn);
+const removePopstateListener = (fn) => window.removeEventListener('popstate', fn);
 
-let getLocation = (opts) => {
-    let path = opts.useHash
+const getLocation = (opts) => {
+    const path = opts.useHash
         ? window.location.hash.replace(new RegExp('^#' + opts.hashPrefix), '')
         : window.location.pathname.replace(new RegExp('^' + opts.base), '');
     return path + window.location.search;
 };
+
+const getState = () => window.history.state;
 
 /**
  * Export browser object
  */
 let browser = {};
 if (isBrowser) {
-    browser = {getBase, pushState, replaceState, addPopstateListener, removePopstateListener, getLocation};
+    browser = {getBase, pushState, replaceState, addPopstateListener, removePopstateListener, getLocation, getState};
 } else {
     // istanbul ignore next
     browser = {
@@ -45,7 +47,8 @@ if (isBrowser) {
         replaceState:           noop,
         addPopstateListener:    noop,
         removePopstateListener: noop,
-        getLocation:            identity('')
+        getLocation:            identity(''),
+        getState:               identity(null)
     };
 }
 
