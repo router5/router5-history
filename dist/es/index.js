@@ -6,6 +6,7 @@ var addPopstateListener = browser.addPopstateListener;
 var removePopstateListener = browser.removePopstateListener;
 var getLocation = browser.getLocation;
 var getBase = browser.getBase;
+var getState = browser.getState;
 
 var pluginName = 'HISTORY';
 
@@ -77,7 +78,9 @@ var historyPlugin = function historyPlugin() {
         };
 
         var onTransitionSuccess = function onTransitionSuccess(toState, fromState, opts) {
-            updateBrowserState(toState, router.buildUrl(toState.name, toState.params), opts.replace || opts.reload);
+            var historyState = getState();
+            var replace = opts.replace || fromState && router.areStatesEqual(toState, fromState) || opts.reload && historyState && router.areStatesEqual(toState, historyState);
+            updateBrowserState(toState, router.buildUrl(toState.name, toState.params), replace);
         };
 
         return { name: pluginName, onStart: onStart, onStop: onStop, onTransitionSuccess: onTransitionSuccess, onPopState: onPopState };

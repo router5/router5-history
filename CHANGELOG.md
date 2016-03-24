@@ -1,3 +1,13 @@
+<a name="3.0.1"></a>
+## [3.0.1](https://github.com/router5/router5-history/compare/v3.0.0...v3.0.1) (2016-03-23)
+
+
+### Bug Fixes
+
+* don't replace history entry on reload if current state is different ([046e35c](https://github.com/router5/router5-history/commit/046e35c))
+
+
+
 <a name="3.0.0"></a>
 # [3.0.0](https://github.com/router5/router5-history/compare/v2.0.1...v3.0.0) (2016-02-28)
 

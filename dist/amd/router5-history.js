@@ -59,12 +59,16 @@ define('router5HistoryPlugin', function () { 'use strict';
         return path + window.location.search;
     };
 
+    var getState$1 = function getState() {
+        return window.history.state;
+    };
+
     /**
      * Export browser object
      */
     var browser = {};
     if (isBrowser) {
-        browser = { getBase: getBase$1, pushState: pushState$1, replaceState: replaceState$1, addPopstateListener: addPopstateListener$1, removePopstateListener: removePopstateListener$1, getLocation: getLocation$1 };
+        browser = { getBase: getBase$1, pushState: pushState$1, replaceState: replaceState$1, addPopstateListener: addPopstateListener$1, removePopstateListener: removePopstateListener$1, getLocation: getLocation$1, getState: getState$1 };
     } else {
         // istanbul ignore next
         browser = {
@@ -73,7 +77,8 @@ define('router5HistoryPlugin', function () { 'use strict';
             replaceState: noop,
             addPopstateListener: noop,
             removePopstateListener: noop,
-            getLocation: identity('')
+            getLocation: identity(''),
+            getState: identity(null)
         };
     }
 
@@ -85,6 +90,7 @@ define('router5HistoryPlugin', function () { 'use strict';
     var removePopstateListener = browser$1.removePopstateListener;
     var getLocation = browser$1.getLocation;
     var getBase = browser$1.getBase;
+    var getState = browser$1.getState;
 
     var pluginName = 'HISTORY';
 
@@ -156,7 +162,9 @@ define('router5HistoryPlugin', function () { 'use strict';
             };
 
             var onTransitionSuccess = function onTransitionSuccess(toState, fromState, opts) {
-                updateBrowserState(toState, router.buildUrl(toState.name, toState.params), opts.replace || opts.reload);
+                var historyState = getState();
+                var replace = opts.replace || fromState && router.areStatesEqual(toState, fromState) || opts.reload && historyState && router.areStatesEqual(toState, historyState);
+                updateBrowserState(toState, router.buildUrl(toState.name, toState.params), replace);
             };
 
             return { name: pluginName, onStart: onStart, onStop: onStop, onTransitionSuccess: onTransitionSuccess, onPopState: onPopState };
