@@ -28,7 +28,7 @@ const getLocation = (opts) => {
     const path = opts.useHash
         ? window.location.hash.replace(new RegExp('^#' + opts.hashPrefix), '')
         : window.location.pathname.replace(new RegExp('^' + opts.base), '');
-    return path + window.location.search;
+    return (path || '/') + window.location.search;
 };
 
 const getState = () => window.history.state;

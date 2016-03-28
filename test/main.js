@@ -41,7 +41,7 @@ function test(useHash) {
         it('should update history on start', function (done) {
             router.start(function (err, state) {
                 expect(window.history.state).toEqual(state);
-                expect(getPath(useHash)).toBe('/home');
+                expect(getPath(useHash)).toBe(useHash ? '/' : '/home');
                 done();
             });
         });
