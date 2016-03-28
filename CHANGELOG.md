@@ -1,3 +1,13 @@
+<a name="3.0.2"></a>
+## [3.0.2](https://github.com/router5/router5-history/compare/v3.0.1...v3.0.2) (2016-03-28)
+
+
+### Bug Fixes
+
+* treat emtpy hash as '/' ([1cdcca4](https://github.com/router5/router5-history/commit/1cdcca4))
+
+
+
 <a name="3.0.1"></a>
 ## [3.0.1](https://github.com/router5/router5-history/compare/v3.0.0...v3.0.1) (2016-03-23)
 

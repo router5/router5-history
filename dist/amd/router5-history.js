@@ -56,7 +56,7 @@ define('router5HistoryPlugin', function () { 'use strict';
 
     var getLocation$1 = function getLocation(opts) {
         var path = opts.useHash ? window.location.hash.replace(new RegExp('^#' + opts.hashPrefix), '') : window.location.pathname.replace(new RegExp('^' + opts.base), '');
-        return path + window.location.search;
+        return (path || '/') + window.location.search;
     };
 
     var getState$1 = function getState() {

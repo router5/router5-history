@@ -1,6 +1,6 @@
 {
   "name": "router5-history",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "History plugin for router5",
   "main": "dist/commonjs/index.js",
   "jsnext:main": "dist/es/index.js",
