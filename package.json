@@ -1,6 +1,6 @@
 {
   "name": "router5-history",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "History plugin for router5",
   "main": "dist/commonjs/index.js",
   "jsnext:main": "dist/es/index.js",
@@ -36,7 +36,7 @@
   "homepage": "http://router5.github.io",
   "devDependencies": {
     "babel-core": "^6.3.26",
-    "babel-eslint": "^4.1.6",
+    "babel-eslint": "^6.0.0",
     "babel-plugin-add-module-exports": "^0.1.2",
     "babel-plugin-transform-export-extensions": "^6.3.13",
     "babel-plugin-transform-object-rest-spread": "^6.3.13",
@@ -44,7 +44,7 @@
     "babel-preset-es2015-rollup": "^1.1.1",
     "conventional-changelog": "^0.5.3",
     "coveralls": "^2.11.4",
-    "eslint": "^1.10.3",
+    "eslint": "^2.5.3",
     "jasmine-core": "^2.3.4",
     "karma": "^0.13.11",
     "karma-chrome-launcher": "^0.2.1",

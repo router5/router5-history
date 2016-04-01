@@ -1,3 +1,13 @@
+<a name="3.0.3"></a>
+## [3.0.3](https://github.com/router5/router5-history/compare/v3.0.2...v3.0.3) (2016-04-01)
+
+
+### Bug Fixes
+
+* don't ignore query parameters when deciding to replace or not ([f559c22](https://github.com/router5/router5-history/commit/f559c22))
+
+
+
 <a name="3.0.2"></a>
 ## [3.0.2](https://github.com/router5/router5-history/compare/v3.0.1...v3.0.2) (2016-03-28)
 

@@ -31,6 +31,15 @@ var historyPlugin = function historyPlugin() {
             return getLocation(router.options);
         };
 
+        router.replaceHistoryState = function (name) {
+            var params = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+
+            var state = router.buildState(name, params);
+            var url = router.buildUrl(name, params);
+            router.lastKnownState = state;
+            replaceState(state, '', url);
+        };
+
         var updateBrowserState = function updateBrowserState(state, url, replace) {
             if (replace) replaceState(state, '', url);else pushState(state, '', url);
         };
@@ -91,7 +100,7 @@ var historyPlugin = function historyPlugin() {
 
         var onTransitionSuccess = function onTransitionSuccess(toState, fromState, opts) {
             var historyState = getState();
-            var replace = opts.replace || fromState && router.areStatesEqual(toState, fromState) || opts.reload && historyState && router.areStatesEqual(toState, historyState);
+            var replace = opts.replace || fromState && router.areStatesEqual(toState, fromState, false) || opts.reload && historyState && router.areStatesEqual(toState, historyState, false);
             updateBrowserState(toState, router.buildUrl(toState.name, toState.params), replace);
         };
 
