@@ -8,6 +8,13 @@ const historyPlugin = ({ forceDeactivate } = {}) => (router) => {
         return getLocation(router.options);
     };
 
+    router.replaceHistoryState = function(name, params = {}) {
+        const state = router.buildState(name, params);
+        const url = router.buildUrl(name, params);
+        router.lastKnownState = state;
+        replaceState(state, '', url);
+    };
+
     const updateBrowserState = (state, url, replace) => {
         if (replace) replaceState(state, '', url);
         else pushState(state, '', url);
@@ -67,8 +74,8 @@ const historyPlugin = ({ forceDeactivate } = {}) => (router) => {
 
     const onTransitionSuccess = (toState, fromState, opts) => {
         const historyState = getState();
-        const replace = opts.replace || fromState && router.areStatesEqual(toState, fromState) ||
-            opts.reload && historyState && router.areStatesEqual(toState, historyState);
+        const replace = opts.replace || fromState && router.areStatesEqual(toState, fromState, false) ||
+            opts.reload && historyState && router.areStatesEqual(toState, historyState, false);
         updateBrowserState(toState, router.buildUrl(toState.name, toState.params), replace);
     };
 
