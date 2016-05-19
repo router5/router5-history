@@ -42,6 +42,10 @@ router.usePlugin(historyPlugin({ forceDeactivate: true }));
 - Listens to popstate events (back and forward buttons, manual changes of URL)
 
 
+### Replacing history
+
+Sometimes, you might want to silently replace the current history entry. This plugin decorates your router instance with a `replaceHistoryState(name, params)` function. The new state provided will also replace the router last known state. Use with care, this could affect the next transition.
+
 ### Contributing
 
 Please read [contributing guidelines](https://github.com/router5/router5/blob/master/CONTRIBUTING.md) on router5 repository.
