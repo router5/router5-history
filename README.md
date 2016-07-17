@@ -15,7 +15,7 @@ The `dist` folder contains:
 
 Sources are distributed through:
 - bower (`bower install router5-history`)
-- npm (`bower install --save router5-history`)
+- npm (`npm install --save router5-history`)
 
 ### How to use
 
