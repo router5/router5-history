@@ -52,7 +52,7 @@ const historyPlugin = ({ forceDeactivate } = {}) => (router) => {
                     // TODO: history.back()?
                 } else {
                     // Force navigation to default state
-                    router.navigate(defaultRoute, defaultParams, {forceDeactivate, reload: true, replace: true});
+                    defaultRoute && router.navigate(defaultRoute, defaultParams, {forceDeactivate, reload: true, replace: true});
                 }
             } else {
                 router._invokeListeners('$$success', toState, fromState, {replace: true});
