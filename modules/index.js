@@ -29,7 +29,7 @@ const historyPlugin = ({ forceDeactivate } = {}) => (router) => {
         if (!state) {
             // If current state is already the default route, we will have a double entry
             // Navigating back and forth will emit SAME_STATES error
-            router.navigate(defaultRoute, defaultParams, {forceDeactivate, reload: true, replace: true});
+            defaultRoute && router.navigate(defaultRoute, defaultParams, {forceDeactivate, reload: true, replace: true});
             return;
         }
         if (router.lastKnownState && router.areStatesEqual(state, router.lastKnownState, false)) {
@@ -52,7 +52,7 @@ const historyPlugin = ({ forceDeactivate } = {}) => (router) => {
                     // TODO: history.back()?
                 } else {
                     // Force navigation to default state
-                    router.navigate(defaultRoute, defaultParams, {forceDeactivate, reload: true, replace: true});
+                    defaultRoute && router.navigate(defaultRoute, defaultParams, {forceDeactivate, reload: true, replace: true});
                 }
             } else {
                 router._invokeListeners('$$success', toState, fromState, {replace: true});
