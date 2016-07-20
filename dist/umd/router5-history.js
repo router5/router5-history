@@ -4,7 +4,9 @@
     (global.router5HistoryPlugin = factory());
 }(this, function () { 'use strict';
 
-    var babelHelpers_extends = Object.assign || function (target) {
+    var babelHelpers = {};
+
+    babelHelpers.extends = Object.assign || function (target) {
       for (var i = 1; i < arguments.length; i++) {
         var source = arguments[i];
 
@@ -17,6 +19,8 @@
 
       return target;
     };
+
+    babelHelpers;
 
     /**
      * Dumb functions
@@ -128,17 +132,18 @@
                 var defaultRoute = _router$options.defaultRoute;
                 var defaultParams = _router$options.defaultParams;
 
+
                 if (!state) {
                     // If current state is already the default route, we will have a double entry
                     // Navigating back and forth will emit SAME_STATES error
-                    router.navigate(defaultRoute, defaultParams, { forceDeactivate: forceDeactivate, reload: true, replace: true });
+                    defaultRoute && router.navigate(defaultRoute, defaultParams, { forceDeactivate: forceDeactivate, reload: true, replace: true });
                     return;
                 }
                 if (router.lastKnownState && router.areStatesEqual(state, router.lastKnownState, false)) {
                     return;
                 }
 
-                var fromState = babelHelpers_extends({}, router.getState());
+                var fromState = babelHelpers.extends({}, router.getState());
 
                 router._transition(state, fromState, { forceDeactivate: forceDeactivate }, function (err, toState) {
                     if (err) {
@@ -154,7 +159,7 @@
                             // TODO: history.back()?
                         } else {
                                 // Force navigation to default state
-                                router.navigate(defaultRoute, defaultParams, { forceDeactivate: forceDeactivate, reload: true, replace: true });
+                                defaultRoute && router.navigate(defaultRoute, defaultParams, { forceDeactivate: forceDeactivate, reload: true, replace: true });
                             }
                     } else {
                         router._invokeListeners('$$success', toState, fromState, { replace: true });

@@ -1,3 +1,13 @@
+<a name="3.0.4"></a>
+## [3.0.4](https://github.com/router5/router5-history/compare/v3.0.3...v3.0.4) (2016-07-20)
+
+
+### Bug Fixes
+
+* don't attempt to navigate to default route if no default route has been defined ([749c057](https://github.com/router5/router5-history/commit/749c057)), closes [router5/router5#66](https://github.com/router5/router5/issues/66)
+
+
+
 <a name="3.0.3"></a>
 ## [3.0.3](https://github.com/router5/router5-history/compare/v3.0.2...v3.0.3) (2016-04-01)
 
